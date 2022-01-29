@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:sec="http://thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
+<head th:include="_template :: head"></head>
+<body>
+
+<header>
+    <h1><a href="/">Epic Task</a></h1>
+</header>
+
+<section class="card form">
+    <h2 th:text="#{user.create}"></h2>
+
+    <div sec:authorize="isAuthenticated()">
+        <form class="form-vertical" th:action="@{/user}" method="post" th:object="${user}"
+              th:include="_template :: user"></form>
+    </div>
+
+    <div sec:authorize="!isAuthenticated()">
+        <form class="form-vertical" th:action="@{/register}" method="post" th:object="${user}"
+              th:include="_template :: user"></form>
+    </div>
+
+</section>
+
+</body>
+</html>

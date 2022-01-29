@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head th:include="_template :: head"></head>
+
+<body>
+
+<h1>EPIC TASK</h1>
+
+<main class="home">
+    <div class="left">
+        <h2 th:text="#{home.title}"></h2>
+        <p th:text="#{home.p}"></p>
+
+        <div class="buttons">
+
+            <a href="/login" class="button primary">
+                <span class="material-icons"> login </span>
+                <span th:text="#{button.login}"></span>
+            </a>
+
+            <a href="/user/new" class="button">
+                <span class="material-icons"> person </span>
+                <span th:text="#{button.register}"></span>
+            </a>
+        </div>
+    </div>
+
+    <aside class="right">
+        <img alt="" th:src="@{~/images/saly.svg}">
+    </aside>
+
+
+</main>
+
+</body>
+</html>

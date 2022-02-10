@@ -2,6 +2,7 @@ package br.com.fiap.epictask.exceptions;
 
 
 import br.com.fiap.epictask.model.ApiError;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -14,12 +15,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestControllerAdvice
+@Slf4j
 public class ApiExceptionHandler {
 
 
     //TRATANDO ERROS DE REGRAS DE NEGÓCIO
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiError> handleException(MethodArgumentNotValidException e) {
+        log.info("erro de validação aconteceu");
         List<ObjectError> errors = e.getBindingResult().getAllErrors();
         List<String> listErr = new ArrayList<>();
 

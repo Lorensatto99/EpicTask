@@ -4,17 +4,16 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Data
-@Entity
+@Entity(name = "TB_USER")
+@Table(name = "TB_USER")
+@SequenceGenerator(name = "user", sequenceName = "SQ_TB_USER", allocationSize = 1)
 public class User implements UserDetails {
 
     private static final long serialVersionUID = 1L;
@@ -32,6 +31,8 @@ public class User implements UserDetails {
 
     @Size(min = 8, message = "{user.password.size}")
     private String password;
+
+    private int points;
 
     @NotBlank(message = "{user.github.blank}")
     private String giuthubuser;

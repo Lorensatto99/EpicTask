@@ -3,6 +3,8 @@ package br.com.fiap.epictask.controler.api;
 import br.com.fiap.epictask.model.Task;
 import br.com.fiap.epictask.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -23,6 +25,7 @@ public class ApiTaskController {
     private TaskRepository repository;
 
     @GetMapping
+    @Cacheable("tasks")
     public Page<Task> index(@RequestParam(required = false) String title, @PageableDefault(size = 5) Pageable pageable) {
         return title == null ? repository.findAll(pageable) : repository.findByTitleLike("%" + title + "%", pageable);
     }
@@ -53,6 +56,7 @@ public class ApiTaskController {
     }
 
     @PutMapping("{id}")
+    @CacheEvict(value = "tasks", allEntries = true)
     public ResponseEntity<Task> change(@Valid @RequestBody Task newtask, @PathVariable Long id, Errors errors) {
         Optional<Task> oldTask = repository.findById(id);
 
@@ -73,8 +77,10 @@ public class ApiTaskController {
     }
 
     @DeleteMapping("{id}")
+    @CacheEvict(value = "tasks", allEntries = true)
     public ResponseEntity<Task> destroy(@PathVariable Long id) {
         Optional<Task> task = repository.findById(id);
+
         //Retorna "Not Found" se o valor não existir
         if (task.isEmpty()) return ResponseEntity.notFound().build();
         repository.deleteById(id);

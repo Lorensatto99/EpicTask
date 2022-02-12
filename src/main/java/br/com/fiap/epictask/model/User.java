@@ -19,7 +19,7 @@ public class User implements UserDetails {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "user", strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotBlank(message = "{user.name.blank}")
@@ -34,12 +34,21 @@ public class User implements UserDetails {
 
     private int points;
 
+
+    public String getAvatarUrl() {
+        return "https://avatars.githubusercontent.com/" + this.githubuser;
+    }
+
+    //Propriedades do UserDetails
     @NotBlank(message = "{user.github.blank}")
-    private String giuthubuser;
+    private String githubuser;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.roles;
     }
 
     @Override
@@ -54,7 +63,7 @@ public class User implements UserDetails {
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override

@@ -19,9 +19,9 @@
 <body>
 
 <header th:fragment="header">
-    <h1><a href="">Epic Task</a></h1>
+    <h1><a href="/">Epic Task</a></h1>
     <div class="login-info">
-        <span th:text="${#authentication.getPrincipal().getEmail()}}"></span>
+        <span th:text="${#authentication.getPrincipal().getName()}"></span>
         <img class="avatar" th:src="${#authentication.getPrincipal().getAvatarUrl()}" alt="">
         <a href="/logout" title="sair">
             <span class="material-icons">logout</span>

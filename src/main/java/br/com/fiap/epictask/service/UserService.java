@@ -64,7 +64,7 @@ public class UserService {
 
         User user = optional.get();
         user.setName(newUser.getName());
-        user.setGiuthubuser(newUser.getGiuthubuser());
+        user.setGithubuser(newUser.getGithubuser());
         user.setEmail(newUser.getEmail());
         user.setPassword(newUser.getPassword());
 

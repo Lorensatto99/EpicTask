@@ -12,12 +12,15 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+
+//Classe prórpria para autenticar o usuário
 @Service
 public class AuthenticationService implements UserDetailsService {
 
     @Autowired
     private UserRepository repository;
 
+    //Pesquisa o usuario no banco de dados
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<User> user = repository.findByEmail(username);
@@ -25,6 +28,7 @@ public class AuthenticationService implements UserDetailsService {
         return user.get();
     }
 
+    //Método para criptografar a senha do usuário
     public static PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }

@@ -14,7 +14,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthenticationService authenticationService;
 
-    //autenticação
+
+    //executa a autenticação do usuario;
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(authenticationService)
@@ -22,21 +23,41 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
 
-    //Autorização
+    //Permissoes de rota baseado na autenticação do usuário
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
-                .antMatchers("/user", "/task/**")
+        http
+                //Bloqueia Acesso se não estivar autenticador os endpoints : /user, /task/**
+                .authorizeRequests()
+
+                //Precisa ter acesso de administrador para acessar o diretório /user
+                .antMatchers("/user")
+                .hasRole("ADMIN")
+
+                //Precisa estar autenticado para acessar /task/**
+                .antMatchers("/task/**")
                 .authenticated()
                 .anyRequest()
                 .permitAll()
+
                 .and()
+
+                //permitir o formulário de login e direciona para a página de login
                 .formLogin()
                 .loginPage("/login")
                 .defaultSuccessUrl("/task")
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/")
+
+                //Acesso ao h2-console
+                .and()
+                .csrf()
+                .disable()
+                .headers()
+                .frameOptions()
+                .disable();
+
     }
 }

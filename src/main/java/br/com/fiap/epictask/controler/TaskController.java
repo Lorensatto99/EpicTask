@@ -28,13 +28,16 @@ public class TaskController {
 
     //@RequestMapping(value="/task", method=RequestMethod.GET)
     @GetMapping
-    public ModelAndView index() {//Método que mostra a tela das tarefas
+    public ModelAndView index() {
+        //Método que mostra a tela das tarefas
         return service.index();
+
     }
 
     @RequestMapping("new")
     public String create(Task task) {
         return service.create();
+
     }
 
     //@RequestMapping(value="/task", method=RequestMethod.POST)
@@ -46,10 +49,12 @@ public class TaskController {
     @GetMapping("/hold/{id}")
     public String hold(@PathVariable Long id, Authentication auth) {
         return service.hold(id, auth);
+
     }
 
     @GetMapping("/release/{id}")
     public String release(@PathVariable Long id, Authentication auth) {
         return service.release(id, auth);
+
     }
 }

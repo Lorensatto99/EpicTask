@@ -10,8 +10,7 @@ import javax.validation.constraints.Size;
 
 
 @Data
-@Entity(name = "TB_TASKS")
-@Table(name = "TB_TASKS")
+@Entity(name = "TB_TASK")
 @SequenceGenerator(name = "task", sequenceName = "SQ_TB_TASK", allocationSize = 1)
 public class Task {
     @Id

@@ -43,7 +43,6 @@ public class TaskService {
         if (result.hasErrors()) {
             return "task-form";
         }
-
         redirect.addFlashAttribute("message", message.getMessage("newtask.success", null, LocaleContextHolder.getLocale()));
         return "redirect:/task";
     }
@@ -54,17 +53,13 @@ public class TaskService {
 
     public String hold(Long id, Authentication auth) {
         Optional<Task> optional = repository.findById(id);
-
         if (optional.isEmpty()) {
             throw new TaskNotFoundException("Tarefa não encontrada");
         }
-
         Task task = optional.get();
-
         if (task.getUser() != null) {
             throw new NotAllowedException("Tarefa já atribuída");
         }
-
         User user = (User) auth.getPrincipal();
         task.setUser(user);
         repository.save(task);
@@ -73,13 +68,10 @@ public class TaskService {
 
     public String release(Long id, Authentication auth) {
         Optional<Task> optional = repository.findById(id);
-
         if (optional.isEmpty()) {
             throw new TaskNotFoundException("Tarefa não encontrada");
         }
-
         Task task = optional.get();
-
         User user = (User) auth.getPrincipal();
 
         if (!task.getUser().equals(user)) {

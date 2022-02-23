@@ -9,10 +9,10 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Collection;
+import java.util.Objects;
 
 @Data
 @Entity(name = "TB_USER")
-@Table(name = "TB_USER")
 @SequenceGenerator(name = "user", sequenceName = "SQ_TB_USER", allocationSize = 1)
 public class User implements UserDetails {
 
@@ -75,4 +75,23 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        return Objects.equals(id, other.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+
 }

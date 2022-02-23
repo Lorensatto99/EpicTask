@@ -14,7 +14,13 @@
 	padding: 1rem;
 	max-width: 250px;
 	border-radius: 10px;
+	transition: 0.3s;
+}
 
+.card .task:hover{
+  transform: scale(1.05);
+  transform:translateY(-20px);
+  filter: drop-shadow(0 1rem 0.75rem black);
 }
 
 .card .task h3{

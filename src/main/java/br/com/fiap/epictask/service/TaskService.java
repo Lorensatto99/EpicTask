@@ -43,6 +43,7 @@ public class TaskService {
         if (result.hasErrors()) {
             return "task-form";
         }
+        repository.save(task);
         redirect.addFlashAttribute("message", message.getMessage("newtask.success", null, LocaleContextHolder.getLocale()));
         return "redirect:/task";
     }

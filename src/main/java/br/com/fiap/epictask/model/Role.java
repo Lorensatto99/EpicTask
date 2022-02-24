@@ -14,7 +14,7 @@ public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue(generator = "user", strategy = GenerationType.SEQUENCE)
     private Long id;
-    private String name; //ROLE_ADMIN ou ROLE_USER
+    private String name;
 
 
     @Override

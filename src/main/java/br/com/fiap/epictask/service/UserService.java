@@ -1,5 +1,6 @@
 package br.com.fiap.epictask.service;
 
+import br.com.fiap.epictask.model.Role;
 import br.com.fiap.epictask.model.User;
 import br.com.fiap.epictask.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,8 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -35,6 +35,15 @@ public class UserService {
     public String save(User user, BindingResult result, RedirectAttributes redirect) {
         if (result.hasErrors()) return "user-form";
         user.setPassword(AuthenticationService.getPasswordEncoder().encode(user.getPassword()));
+
+
+        Role regra = new Role();
+        regra.setId(2L);
+        Collection<Role> collection = new ArrayList<>();
+        collection.add(regra);
+        user.setRoles(collection);
+        repository.save(user);
+
         redirect.addFlashAttribute("message", message.getMessage("deleteuser.success", null, LocaleContextHolder.getLocale()));
         return "redirect:/user";
     }
@@ -57,11 +66,10 @@ public class UserService {
     }
 
     public String edit(User newUser, BindingResult result, RedirectAttributes redirect) {
-        Optional<User> optional = repository.findByEmail(newUser.getEmail());
-
         if (result.hasErrors()) return "user-form-update";
-        newUser.setPassword(AuthenticationService.getPasswordEncoder().encode(newUser.getPassword()));
 
+        Optional<User> optional = repository.findById(newUser.getId());
+        newUser.setPassword(AuthenticationService.getPasswordEncoder().encode(newUser.getPassword()));
         User user = optional.get();
         user.setName(newUser.getName());
         user.setGithubuser(newUser.getGithubuser());
@@ -69,7 +77,7 @@ public class UserService {
         user.setPassword(newUser.getPassword());
 
         redirect.addFlashAttribute("message", message.getMessage("edituser.success", null, LocaleContextHolder.getLocale()));
-        repository.save(newUser);
+        repository.save(user);
         return "redirect:/user";
     }
 }

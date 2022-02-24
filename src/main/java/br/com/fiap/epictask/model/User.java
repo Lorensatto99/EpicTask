@@ -13,7 +13,6 @@ import java.util.Objects;
 
 @Data
 @Entity(name = "TB_USER")
-@SequenceGenerator(name = "user", sequenceName = "SQ_TB_USER", allocationSize = 1)
 public class User implements UserDetails {
 
     private static final long serialVersionUID = 1L;

@@ -34,8 +34,7 @@ public class AuthorizationFilter extends OncePerRequestFilter {
         String token = extractToken(request);
 
         boolean valid = tokenService.valid(token);
-
-
+        
         if (valid) authorize(token);
 
         filterChain.doFilter(request, response);
@@ -52,8 +51,9 @@ public class AuthorizationFilter extends OncePerRequestFilter {
     private String extractToken(HttpServletRequest request) {
         String header = request.getHeader("Authorization");
 
-        if (header == null || header.isEmpty() || header.startsWith("Bearer "))
+        if (header == null || header.isEmpty() || !header.startsWith("Bearer ")) { //tratando possiveis erros
             return null;
+        }
 
         return header.substring(7, header.length());
     }

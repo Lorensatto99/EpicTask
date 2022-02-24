@@ -10,6 +10,13 @@
     <h2 th:text="#{button.edituser}">Editar Usuário</h2>
 
     <form class="form-vertical" th:action="@{/user/update}" method="post" th:object="${user}">
+        <label for="id" style="display:none;"></label>
+        <input
+                name="id"
+                id="id"
+                th:value="${user.id}"
+                style="display:none;"
+        />
         <label for="name" class="hide">Nome</label>
         <input
                 type="text"

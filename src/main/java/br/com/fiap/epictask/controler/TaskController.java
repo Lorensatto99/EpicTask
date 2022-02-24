@@ -1,6 +1,7 @@
 package br.com.fiap.epictask.controler;
 
 import br.com.fiap.epictask.model.Task;
+import br.com.fiap.epictask.model.User;
 import br.com.fiap.epictask.service.TaskService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -28,7 +29,7 @@ public class TaskController {
 
     //@RequestMapping(value="/task", method=RequestMethod.GET)
     @GetMapping
-    public ModelAndView index() {
+    public ModelAndView index(Authentication auth) {
         //Método que mostra a tela das tarefas
         return service.index();
 

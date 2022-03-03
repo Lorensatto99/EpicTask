@@ -13,9 +13,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>epictask</name>
     <packaging>war</packaging>
-    <build>
-        <finalName>ROOT</finalName>
-    </build>
     <description>App de controle de tarefas gamificado.</description>
     <properties>
         <java.version>11</java.version>
@@ -96,6 +93,7 @@
     </dependencies>
 
     <build>
+        <finalName>ROOT</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

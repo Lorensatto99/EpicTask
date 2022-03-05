@@ -31,7 +31,7 @@ INSERT INTO TB_TASK (title, description, points, status, user_id) VALUES (
     'Criar bd oracle na nuvem',
     300,
     10,
-    1
+    2
 );
 
 INSERT INTO TB_TASK (title, description, points, status) VALUES (
@@ -49,13 +49,14 @@ INSERT INTO TB_TASK (title, description, points, status) VALUES (
 );
 
 INSERT INTO TB_USER(name, email, password, points, githubuser) VALUES
+('Usuario Teste', 'teste@teste.com', '$2a$12$pZRoWu6.Xk1cHJeu8Qm/G.QvGHlAY.81qgGCUpSzHM05Q6NdpVoLS',300, 'teste'),
 ('Celso Lorensatto', 'lorensatto98@gmail.com', '$2a$12$PhDeVXbGSlyxWxiv1i41fuUU1jaf7ZhhGqWbGevTedjjlsA7zJGme',50, 'Lorensatto99'),
 ('Guilherme Rodriguero', 'gui@mail.com', '$2a$12$.NtDBYL0kWvB1q/zS0/Heuyl.nC3AIiiUoQNu5JSeh.irrXWCbsUm',150, 'GuiRodriguero'),
 ('Eduardo Costa', 'edu@mail.com', '$2a$12$VdIuZ6W.5.wGRJPM4832ruTmz9WXyYUYwrkzHho6cFPh9EfgFnw2G',100, 'eD0o');
 
 INSERT INTO TB_ROLE(name) VALUES ('ROLE_ADMIN'), ('ROLE_USER');
 
-INSERT INTO TB_USER_ROLES VALUES (1,1),(2,2),(3,2);
+INSERT INTO TB_USER_ROLES VALUES (1,2),(2,1),(3,2),(4,2);
 
 
 

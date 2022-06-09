@@ -1,3 +1,5 @@
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FLorensatto99%2FEpictask&count_bg=%23DF7C26&title_bg=%23513E2E&icon=googlepodcasts.svg&icon_color=%23FFFFFF&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+
 ## Sobre
 
 Acesse o projeto [aqui](https://epictask.herokuapp.com/).
